@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manoj Abburi — UI/UX, Product & Visual Designer</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta name="description"
+    content="Manoj Abburi designs digital experiences, visual communication, and product interfaces that turn ideas into something people can actually use.">
+
+  <script>
+    try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) { }
+    document.documentElement.classList.add('js');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Gaegu:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ==========================================================================
+       FLOATING CONTROLS
+       ========================================================================== -->
+  <div class="top-pills">
+    <span class="pill pill-status"><i class="dot-live"></i> Available for work</span>
+    <button class="pill" id="themeToggle" aria-label="Switch to day theme">
+      <svg class="ico ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
+      <svg class="ico ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" /></svg>
+      <span id="themeLabel">Day</span>
+    </button>
+  </div>
+
+  <nav class="dock" aria-label="Main navigation">
+    <a href="#top" class="dock-link active" data-section="top">
+      <img class="dock-avatar" src="assets/manoj.jpg" alt="">
+      <span>Home</span>
+    </a>
+    <a href="#story" class="dock-link" data-section="story">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></svg>
+      <span>About</span>
+    </a>
+    <a href="#journey" class="dock-link" data-section="journey">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14" /></svg>
+      <span>Journey</span>
+    </a>
+    <a href="#work" class="dock-link" data-section="work">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 12h18" /></svg>
+      <span>Work</span>
+    </a>
+    <a href="#contact" class="dock-link" data-section="contact">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
+      <span>Contact</span>
+    </a>
+    <a href="assets/Manoj_Abburi_UI_UX_Designer_Resume.pdf" download="Manoj_Abburi_UI_UX_Designer_Resume.pdf" class="dock-cta" id="resumeBtn">Resume ↗</a>
+  </nav>
+
+  <main>
+
+    <!-- ==========================================================================
+         HERO / THE SCENE
+         ========================================================================== -->
+    <section class="valley" id="top" aria-label="Intro">
+      <img class="valley-bg" src="assets/hero-banner.jpg" alt="Manoj in a red shirt against a dark red background"
+        fetchpriority="high">
+      <div class="valley-shade" aria-hidden="true"></div>
+
+      <div class="valley-copy">
+        <p class="hey">
+          <svg class="ico wave-hand" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V6.5a1.5 1.5 0 0 1 3 0V11M10 10V4.5a1.5 1.5 0 0 1 3 0V10M13 10V5.5a1.5 1.5 0 0 1 3 0V12M16 11V8.5a1.5 1.5 0 0 1 3 0V14a7 7 0 0 1-7 7h-.5A6.5 6.5 0 0 1 6 17.5L4 14a1.6 1.6 0 0 1 2.6-1.8L7 13" /></svg>
+          hey, I’m Manoj Abburi
+        </p>
+        <h1>
+          <span>Designing screens</span>
+          <span>you won’t <span class="rq">scroll past.</span></span>
+        </h1>
+        <p class="sub">UI/UX · Product · Visual designer. I design digital experiences, visual communication,
+          and product interfaces that turn ideas into something people can actually use.</p>
+      </div>
+
+      <a href="#work" class="pin" style="--x: 50%; --y: 24%;" data-project="0">
+        <span class="pin-logo" style="--c: #3b5bdb;">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2" /><path d="M11 18h2" /></svg>
+        </span> Mobile apps <small>04+</small>
+      </a>
+      <a href="#work" class="pin" style="--x: 53%; --y: 47%;" data-project="1">
+        <span class="pin-logo" style="--c: #ef6f4f;">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="2" /><path d="M8 21h8M12 17v4" /></svg>
+        </span> Websites <small>10+</small>
+      </a>
+      <a href="#work" class="pin" style="--x: 45%; --y: 68%;" data-project="3">
+        <span class="pin-logo" style="--c: #2f9e5b;">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="13" rx="1" /><path d="M8 21l4-5 4 5" /></svg>
+        </span> Presentation decks
+      </a>
+      <a href="#work" class="pin" style="--x: 8%; --y: 70%;" data-project="2">
+        <span class="pin-logo" style="--c: #e8a33a;">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4-1L19 8a2.1 2.1 0 0 0-3-3L5 16l-1 4z" /></svg>
+        </span> Social &amp; marketing
+      </a>
+      <span class="hint" style="--x: 43%; --y: 56%;">click a pin
+        <svg viewBox="0 0 60 20" aria-hidden="true"><path d="M2 12c14 6 30 6 50-4m-8-4 8 4-6 7" /></svg>
+      </span>
+
+      <a href="#story" class="scroll-pill"><span class="mouse"></span> scroll to explore</a>
+    </section>
+
+    <!-- ==========================================================================
+         STORY / ABOUT
+         ========================================================================== -->
+    <section class="story torn" id="story" aria-label="About me">
+      <div class="story-inner">
+        <p class="kicker">About me</p>
+        <p class="tell" id="tell">
+          I’m a <span class="hl" style="--c: var(--sky);">UI/UX, product</span> and visual designer.
+          I design <span class="hl circled">digital experiences,
+            <svg class="circle-draw" viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><path d="M150 6C70 4 8 18 6 42s70 34 150 32 140-14 138-38S200 4 120 10" /></svg></span>
+          visual communication, and <span class="hl" style="--c: var(--lilac);">product interfaces</span>
+          that turn ideas into something
+          <span class="hl" style="--c: var(--sun);">people can actually use.</span>
+        </p>
+      </div>
+
+      <div class="desk" id="desk">
+        <figure class="note polaroid" style="--r: 4deg; --x: 0px; --y: 0px;">
+          <span class="tape"></span>
+          <img src="assets/manoj.jpg" alt="Photo of Manoj Abburi" loading="lazy">
+          <figcaption>that’s me :)</figcaption>
+        </figure>
+        <div class="note" style="--bgc: #ffe58a; --r: -5deg; --x: 0px; --y: 0px;">
+          <span class="tape"></span>
+          <p>Based in Hyderabad, India.</p>
+          <small>HOME BASE</small>
+        </div>
+        <div class="note" style="--bgc: #c9a59a; --r: 3deg; --x: 0px; --y: 0px;">
+          <span class="tape"></span>
+          <p>Open to opportunities, freelance projects &amp; collaborations.</p>
+          <small>AVAILABLE FOR WORK</small>
+        </div>
+        <div class="note" style="--bgc: #a8dcc0; --r: -3deg; --x: 0px; --y: 0px;">
+          <span class="tape"></span>
+          <p>04+ mobile apps. 10+ websites. And counting.</p>
+          <small>BY THE NUMBERS</small>
+        </div>
+        <p class="move-hint">these notes move ;)</p>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         JOURNEY / HEART MAP (scroll-driven; stops are defined in script.js)
+         ========================================================================== -->
+    <section class="journey torn" id="journey" aria-label="The journey">
+      <div class="j-sticky">
+        <div class="j-map" id="jMap">
+          <div class="j-world" id="jWorld"></div>
+        </div>
+        <div class="j-world j-trail-layer" id="jTrailWorld" aria-hidden="true"></div>
+        <div class="j-pins" id="jPins"></div>
+        <div class="j-marker" id="jMarker" aria-hidden="true"><span></span></div>
+
+        <div class="j-head" id="jHead">
+          <p class="kicker">The journey</p>
+          <h2>From an idea,<br><span class="hl" style="--c: var(--sky);">to something people use.</span></h2>
+          <p class="sec-sub">Seven stops, from Hyderabad to now. Scroll to walk the path.</p>
+        </div>
+
+        <article class="j-card" id="jCard" aria-live="polite">
+          <header class="j-card-head">
+            <span class="j-logo" id="jcLogo"></span>
+            <div>
+              <b id="jcName"></b>
+              <span id="jcMeta"></span>
+            </div>
+            <span class="j-count" id="jcCount"></span>
+          </header>
+          <div class="j-card-body">
+            <h3 id="jcTitle"></h3>
+            <p id="jcText"></p>
+            <p class="j-label" id="jcLabel">Highlights</p>
+            <div class="j-extra" id="jcExtra"></div>
+          </div>
+        </article>
+
+        <div class="j-compass" id="jCompass" aria-hidden="true">
+          <span class="n">N</span><span class="e">E</span><span class="s">S</span><span class="w">W</span>
+          <i id="jNeedle"></i>
+        </div>
+        <div class="j-zoom">
+          <button id="jLocate" aria-label="Recenter map">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" /><path d="M12 2v4M12 18v4M2 12h4M18 12h4" /></svg>
+          </button>
+          <div>
+            <button id="jZoomIn" aria-label="Zoom in">+</button>
+            <button id="jZoomOut" aria-label="Zoom out">−</button>
+          </div>
+        </div>
+
+        <div class="j-progress" id="jProgress">
+          <span class="j-dots" id="jDots"></span>
+          <b id="jProgressText">Hyderabad → now</b>
+        </div>
+        <button class="j-view" id="jView">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14" /></svg>
+          Walk the journey again
+        </button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SELECTED WORK / CARD BOX (cards are built from caseStudies in script.js)
+         ========================================================================== -->
+    <section class="work torn" id="work" aria-label="Selected work">
+      <div class="sec-head center">
+        <p class="kicker">Selected work</p>
+        <h2>Things I designed,<br>and <span class="hl" style="--c: var(--sun);">the thinking behind them.</span></h2>
+        <p class="sec-sub">Mobile apps and websites, from first flow to final screen. Pick a card from the box.</p>
+      </div>
+
+      <!-- tall track: the box stays pinned while it opens -->
+      <div class="box-pin" id="boxPin">
+        <div class="box-scene" id="boxScene">
+          <div class="box">
+            <div class="box-wall box-back"><div class="box-lid"><span class="lid-tag">Scroll to open ↓</span></div></div>
+            <div class="box-wall box-left"></div>
+            <div class="box-wall box-right"></div>
+            <div class="box-cards" id="boxCards"></div>
+            <div class="box-wall box-front"><span>Things I designed</span></div>
+          </div>
+          <span class="view-bubble" id="viewBubble" aria-hidden="true"><span>View</span></span>
+          <span class="hint hint-static">pick a card
+            <svg viewBox="0 0 60 20" aria-hidden="true"><path d="M2 12c14 6 30 6 50-4m-8-4 8 4-6 7" /></svg>
+          </span>
+        </div>
+      </div>
+
+      <ol class="work-list" id="workList"></ol>
+    </section>
+
+    <!-- ==========================================================================
+         STACK / GIFT BOX
+         ========================================================================== -->
+    <section class="stack torn" id="stack" aria-label="My stack">
+      <div class="sec-head center">
+        <p class="kicker">My stack</p>
+        <h2>Everything I use, <span class="hl" style="--c: var(--sun);">unwrapped.</span></h2>
+        <p class="sec-sub">Six tools I use every week, from the first sketch to the shipped build.</p>
+      </div>
+
+      <div class="gift-stage" id="giftStage">
+        <button class="gift" id="giftBtn" aria-label="Unwrap my toolkit">
+          <span class="gift-lid"><span class="bow"><i></i><i></i><b></b></span></span>
+          <span class="gift-body"><span class="gift-tag">M.</span></span>
+        </button>
+        <button class="pill pill-action" id="giftCta">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="1.5" /><path d="M2 9h20M12 9v12" /></svg>
+          Tap to unwrap
+        </button>
+
+        <ul class="tools" id="tools">
+          <li style="--i: 0;">
+            <span class="tool-ico" style="background: #1e1e1e;">
+              <svg viewBox="0 0 38 57" aria-hidden="true"><path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE" /><path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" fill="#0ACF83" /><path d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" fill="#FF7262" /><path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E" /><path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF" /></svg>
+            </span>
+            <b>Figma</b><small>Interface design</small>
+          </li>
+          <li style="--i: 1;">
+            <span class="tool-ico" style="background: linear-gradient(135deg, #00c4cc, #7d2ae8); color: #fff;">C</span>
+            <b>Canva</b><small>Graphic design</small>
+          </li>
+          <li style="--i: 2;">
+            <span class="tool-ico" style="background: #001e36; color: #31a8ff;">Ps</span>
+            <b>Photoshop</b><small>Graphic design</small>
+          </li>
+          <li style="--i: 3;">
+            <span class="tool-ico" style="background: #c43e1c; color: #fff;">P</span>
+            <b>PowerPoint</b><small>Presentation design</small>
+          </li>
+          <li style="--i: 4;">
+            <span class="tool-ico" style="background: #2e1065; color: #c084fc;">&lt;/&gt;</span>
+            <b>Vibe Coding</b><small>AI &amp; automation</small>
+          </li>
+          <li style="--i: 5;">
+            <span class="tool-ico" style="background: #0f172a; color: #38bdf8;">@</span>
+            <b>Social Media</b><small>Content &amp; growth strategy</small>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PROCESS / WAVE
+         ========================================================================== -->
+    <section class="process torn" id="process" aria-label="How I work">
+      <div class="sec-head">
+        <p class="kicker">How I work</p>
+        <h2>From user flows<br>to <span class="hl" style="--c: var(--mint);">polished prototypes.</span></h2>
+        <p class="sec-sub">UX → Flow → Wireframe → UI → Prototype. Scroll and watch one screen go from a question to a working prototype.</p>
+      </div>
+
+      <!-- One screen, five stages: the canvas evolves as you scroll -->
+      <div class="forge" id="forge">
+        <div class="forge-stick" data-stage="0">
+          <ol class="forge-rail">
+            <li style="--c: #f5c84b;"><button type="button" data-go="0"><span class="fr-n">01</span><span class="fr-t"><b>UX</b><small>Understand the people and the problem.</small></span></button><i class="fr-bar"></i></li>
+            <li style="--c: #7fb2ff;"><button type="button" data-go="1"><span class="fr-n">02</span><span class="fr-t"><b>Flow</b><small>Map every step a user takes.</small></span></button><i class="fr-bar"></i></li>
+            <li style="--c: #f59b85;"><button type="button" data-go="2"><span class="fr-n">03</span><span class="fr-t"><b>Wireframe</b><small>Structure first, pixels later.</small></span></button><i class="fr-bar"></i></li>
+            <li style="--c: #a78bfa;"><button type="button" data-go="3"><span class="fr-n">04</span><span class="fr-t"><b>UI</b><small>Clear, usable, visually strong.</small></span></button><i class="fr-bar"></i></li>
+            <li style="--c: #6fdca6;"><button type="button" data-go="4"><span class="fr-n">05</span><span class="fr-t"><b>Prototype</b><small>Interactive, ready to test.</small></span></button><i class="fr-bar"></i></li>
+          </ol>
+
+          <div class="forge-stage">
+            <div class="forge-canvas" aria-hidden="true">
+              <!-- 01 UX: questions on sticky notes around the problem -->
+              <div class="fx fx-ux">
+                <div class="fx-problem"><small>How might we…</small>make it easy for <u>them</u>?</div>
+                <span class="fx-note" style="--x: 30px; --y: 50px; --r: -7deg; --nc: #ffe27a; --d: 0s;">Who is this for?</span>
+                <span class="fx-note" style="--x: 380px; --y: 40px; --r: 5deg; --nc: #ffb3c7; --d: 0.08s;">What gets in their way?</span>
+                <span class="fx-note" style="--x: 40px; --y: 400px; --r: 4deg; --nc: #a9d4ff; --d: 0.16s;">What does “done” look like?</span>
+                <span class="fx-note" style="--x: 390px; --y: 410px; --r: -5deg; --nc: #b8f0cf; --d: 0.24s;">Talk to them first.</span>
+              </div>
+
+              <!-- 02 Flow: the journey as a map of screens -->
+              <div class="fx fx-flow">
+                <svg viewBox="0 0 600 600"><path class="fx-flow-line" pathLength="100" d="M222 175 H 378 M450 262 V 338 M378 425 H 222" /><path class="fx-flow-head" d="M366 165 L 378 175 L 366 185 M440 326 L 450 338 L 460 326 M234 415 L 222 425 L 234 435" /></svg>
+                <span class="fx-mini" style="--x: 85px; --y: 95px; --d: 0s;"><i></i><i></i><i></i><b>Land</b></span>
+                <span class="fx-mini" style="--x: 385px; --y: 95px; --d: 0.12s;"><i></i><i></i><i></i><b>Browse</b></span>
+                <span class="fx-mini" style="--x: 385px; --y: 345px; --d: 0.24s;"><i></i><i></i><i></i><b>Join</b></span>
+                <span class="fx-mini done" style="--x: 85px; --y: 345px; --d: 0.36s;"><i></i><i></i><i></i><b>Done ✓</b></span>
+                <span class="fx-hand" style="--x: 215px; --y: 268px;">fewest taps<br>to the goal</span>
+              </div>
+
+              <!-- 03–05: the same screen, from grey boxes to a working prototype -->
+              <div class="fx fx-phone">
+                <div class="fp">
+                  <div class="fp-screen">
+                    <div class="fp-grid"><i></i><i></i><i></i><i></i></div>
+                    <div class="fp-a">
+                      <div class="fp-status"><span class="t">9:41</span><span class="t">●●●</span></div>
+                      <div class="fp-head"><span class="fp-av"></span><span><b class="t">Hi there</b><small class="t">3 plans this week</small></span></div>
+                      <div class="fp-hero"><small class="t">This Saturday</small><b class="t">Sunrise run club</b><span class="t">6:30 AM · Lake park</span></div>
+                      <p class="fp-label t">Near you</p>
+                      <div class="fp-row"><i style="--ic: #ffb86b;"></i><span><b class="t">Design meetup</b><small class="t">Thu · 7 PM</small></span></div>
+                      <div class="fp-row"><i style="--ic: #7fb2ff;"></i><span><b class="t">Book club</b><small class="t">Fri · 6 PM</small></span></div>
+                      <div class="fp-row"><i style="--ic: #6fdca6;"></i><span><b class="t">Pottery night</b><small class="t">Sun · 5 PM</small></span></div>
+                      <div class="fp-btn"><span class="t">Join the run</span></div>
+                    </div>
+                    <div class="fp-b">
+                      <span class="fp-check">✓</span>
+                      <b>You’re in!</b>
+                      <small>See you Saturday at 6:30 AM.</small>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- wireframe notes -->
+                <span class="fx-tag wf" style="--x: 68px; --y: 92px;">header<i class="r"></i></span>
+                <span class="fx-tag wf" style="--x: 50px; --y: 178px;">the one<br>key card<i class="r"></i></span>
+                <span class="fx-tag wf right" style="--x: 428px; --y: 340px;"><i class="l"></i>scannable<br>list</span>
+                <span class="fx-tag wf right" style="--x: 428px; --y: 496px;"><i class="l"></i>one clear<br>action</span>
+
+                <!-- UI: the system behind the colour -->
+                <span class="fx-card ui sw" style="--x: 0px; --y: 140px; --r: -5deg;"><b>Colour</b><span><i style="--s: #ff7a45;"></i><i style="--s: #7b5cff;"></i><i style="--s: #1d1c1a;"></i><i style="--s: #f3eee4;"></i></span></span>
+                <span class="fx-card ui ty" style="--x: 432px; --y: 120px; --r: 6deg;"><em>Aa</em><small>Type scale<br>32 · 20 · 15</small></span>
+                <span class="fx-card ui sp" style="--x: 438px; --y: 400px; --r: -4deg;"><b>Spacing</b><span><i style="--w: 8px;"></i><i style="--w: 16px;"></i><i style="--w: 24px;"></i></span></span>
+
+                <!-- Prototype: a cursor taps through -->
+                <span class="fx-hot"></span>
+                <svg class="fx-cursor" viewBox="0 0 24 24"><path d="M5 3l14 8-6 1.6L10 19z" /></svg>
+                <span class="fx-hand pr" style="--x: 440px; --y: 200px;">tap it.<br>it works.</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="forge-cap">Understand the people and the problem.</p>
+          <p class="forge-count"><b>01</b> / 05</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CONTACT / HELLO
+         ========================================================================== -->
+    <section class="hello" id="contact" aria-label="Contact">
+      <div class="sky" aria-hidden="true">
+        <i class="cloud c1"></i><i class="cloud c2"></i><i class="cloud c3"></i><i class="cloud c4"></i>
+      </div>
+
+      <div class="hello-head">
+        <h2>Building something?<br>Maybe I <span class="rq">can help.</span></h2>
+        <p>Open to opportunities, freelance projects &amp; collaborations.</p>
+        <ul class="services" aria-label="Services">
+          <li>UI/UX Design</li>
+          <li>Website Design</li>
+          <li>Mobile App Design</li>
+          <li>Social Media Design</li>
+          <li>Presentation Design</li>
+          <li>Visual Communication</li>
+          <li>AI Automation</li>
+        </ul>
+      </div>
+
+      <div class="keys-panel">
+        <p class="keys-hint">psst, these work on your keyboard too:
+          <kbd>M</kbd><kbd>I</kbd><kbd>L</kbd><kbd>R</kbd>
+        </p>
+        <div class="keys">
+          <div class="key-col">
+            <a class="key" data-key="m" href="mailto:uixmanoj@gmail.com" style="--k1: #f0584a; --k2: #c63a2e;" aria-label="Email me">
+              <i>M</i>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18V7l9 6 9-6v11" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round" /></svg>
+            </a>
+            <p class="knote dn"><span class="arr">↖</span>Projects, roles, or just hi.
+              <button class="mail-copy" id="copyMail" type="button">uixmanoj@gmail.com
+                <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" /><path d="M5 15V5a2 2 0 0 1 2-2h8" /></svg>
+              </button>
+            </p>
+          </div>
+          <div class="key-col">
+            <p class="knote up">Behind the scenes &amp; design snippets.<span class="arr">↘</span></p>
+            <a class="key" data-key="i" href="https://www.instagram.com/manoj.uix" target="_blank" rel="noopener noreferrer" style="--k1: #e84b8a; --k2: #a832b8;" aria-label="Instagram">
+              <i>I</i>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="#fff" stroke-width="2.2" /><circle cx="12" cy="12" r="3.6" fill="none" stroke="#fff" stroke-width="2.2" /><circle cx="16.8" cy="7.2" r="1.2" fill="#fff" /></svg>
+            </a>
+          </div>
+          <div class="key-col">
+            <a class="key" data-key="l" href="https://www.linkedin.com/in/manojabburi" target="_blank" rel="noopener noreferrer" style="--k1: #2f7fd6; --k2: #1a5aa8;" aria-label="LinkedIn">
+              <i>L</i>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" fill="#fff" /><path d="M7.5 10v7M7.5 7v.01M11 17v-7m0 3a3 3 0 0 1 6 0v4" fill="none" stroke="#1a5aa8" stroke-width="2.2" stroke-linecap="round" /></svg>
+            </a>
+            <p class="knote dn"><span class="arr">↑</span>The work, and what I learned doing it.</p>
+          </div>
+          <div class="key-col">
+            <p class="knote up">My resume, one click away.<span class="arr">↘</span></p>
+            <a class="key key-dark" data-key="r" href="assets/Manoj_Abburi_UI_UX_Designer_Resume.pdf" download="Manoj_Abburi_UI_UX_Designer_Resume.pdf" style="--k1: #ffd65c; --k2: #e3ad22;" aria-label="Download my resume">
+              <i>R</i>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v13M6 12l6 6 6-6" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leave a note: the form opens WhatsApp with the note written in -->
+      <div class="note-wall">
+        <div class="note-wall-head">
+          <p class="kicker">The wall</p>
+          <h3>Before you leave, <span class="hl" style="--c: var(--sun);">leave a note.</span></h3>
+          <p>Say hi, share feedback, or tell me about your project. Hit send and WhatsApp opens with your note already written to me.</p>
+        </div>
+
+        <form class="note-form" id="contactForm" novalidate>
+          <span class="tape"></span>
+          <div class="form-group">
+            <label for="name">Your name</label>
+            <input type="text" id="name" class="form-control" placeholder="What should I call you?" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="form-control" placeholder="name@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Your note</label>
+            <textarea id="message" class="form-control" rows="4" placeholder="Tell me about your project..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit">
+            <svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.2Z"/></svg>
+            Send on WhatsApp
+          </button>
+        </form>
+      </div>
+
+      <footer class="footer">
+        <span>© 2026 Manoj Abburi</span>
+        <span>Designed &amp; built with precision in Hyderabad.</span>
+        <a href="#top">Back to top ↑</a>
+      </footer>
+    </section>
+  </main>
+
+  <!-- Project details -->
+  <dialog class="project-modal" id="projectModal" aria-labelledby="pmTitle" data-lenis-prevent>
+    <div class="pm-art" id="pmArt"><img id="pmImg" alt=""></div>
+    <div class="pm-body">
+      <p class="kicker" id="pmCat"></p>
+      <h3 id="pmTitle"></h3>
+      <p id="pmDesc"></p>
+      <ul class="pm-tags" id="pmTags"></ul>
+      <div class="pm-cases" id="pmCases"></div>
+      <a href="#contact" class="pill pill-yellow" id="pmCta">Ask me about this project ↗</a>
+    </div>
+    <button class="pm-close" id="pmClose" aria-label="Close">×</button>
+  </dialog>
+
+  <!-- Case study details -->
+  <dialog class="case-modal" id="caseModal" aria-labelledby="csTitle" data-lenis-prevent>
+    <div id="caseBody"></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="toast-text"></span>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="case-stories.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
