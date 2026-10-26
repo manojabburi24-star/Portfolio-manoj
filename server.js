@@ -1,13 +1,22 @@
 const express = require('express');
 const cors = require('cors');
-const nodemailer = require('nodemailer');
-const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const crypto = require('crypto');
 require('dotenv').config();
+const { Pool } = require('pg');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const databaseUrl = process.env.DATABASE_URL;
+
+if (!databaseUrl) {
+  throw new Error('DATABASE_URL is required to connect to the Neon database.');
+}
+
+const db = new Pool({ connectionString: databaseUrl });
+db.on('error', (err) => {
+  console.error('Unexpected PostgreSQL database error:', err.message);
+});
 
 // Security & Middleware
 app.use(cors());
@@ -27,30 +36,20 @@ const requireAdmin = (req, res, next) => {
   return res.status(404).json({ error: 'Not found' });
 };
 
-// SQLite Database Setup
-const dbPath = path.resolve(process.env.DATABASE_PATH || './messages.db');
-const db = new sqlite3.Database(dbPath, (err) => {
-  if (err) {
-    console.error('Error connecting to SQLite database:', err.message);
-  } else {
-    console.log('Connected to SQLite database at:', dbPath);
-  }
-});
-
 // Initialize Messages Table
-db.serialize(() => {
-  db.run(`
+const initializeDatabase = async () => {
+  await db.query(`
     CREATE TABLE IF NOT EXISTS messages (
       id TEXT PRIMARY KEY,
       name TEXT NOT NULL,
       email TEXT NOT NULL,
       message TEXT NOT NULL,
-      createdAt TEXT NOT NULL,
+      "createdAt" TEXT NOT NULL,
       status TEXT DEFAULT 'new',
       ip TEXT
     )
   `);
-});
+};
 
 // Simple In-Memory Rate Limiting & Duplicate Prevention
 const rateLimitMap = new Map();
@@ -95,26 +94,6 @@ const broadcastNewMessage = (messageObj) => {
   for (const client of sseClients) {
     client.write(data);
   }
-};
-
-// Transporter Factory
-const createTransporter = () => {
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
-  const host = process.env.SMTP_HOST || 'smtp.gmail.com';
-  const port = parseInt(process.env.SMTP_PORT || '465', 10);
-  const secure = process.env.SMTP_SECURE !== 'false';
-
-  if (!user || !pass) {
-    return null; // Local development mode without active SMTP credentials
-  }
-
-  return nodemailer.createTransport({
-    host,
-    port,
-    secure,
-    auth: { user, pass },
-  });
 };
 
 // ==========================================================================
@@ -180,88 +159,45 @@ app.post('/api/contact', async (req, res) => {
 
   const messageRecord = { id, name, email, message, createdAt, status, ip: clientIp };
 
-  // Save to SQLite Database
-  const sql = `INSERT INTO messages (id, name, email, message, createdAt, status, ip) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-  db.run(sql, [id, name, email, message, createdAt, status, clientIp], async function (err) {
-    if (err) {
-      console.error('Database Error:', err.message);
-      return res.status(500).json({ error: 'Failed to persist message to database. Please try again.' });
-    }
+  // Save to Neon PostgreSQL
+  try {
+    await db.query(
+      `INSERT INTO messages (id, name, email, message, "createdAt", status, ip)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+      [id, name, email, message, createdAt, status, clientIp]
+    );
+  } catch (err) {
+    console.error('Database Error:', err.message);
+    return res.status(500).json({ error: 'Failed to persist message to database. Please try again.' });
+  }
 
-    // Broadcast Realtime SSE Event
-    broadcastNewMessage(messageRecord);
+  // Broadcast Realtime SSE Event
+  broadcastNewMessage(messageRecord);
 
-    // Send Email Notification to Gmail
-    const ownerEmail = process.env.OWNER_EMAIL || 'manojabburi24@gmail.com';
-    const portfolioUrl = process.env.PORTFOLIO_URL || 'http://localhost:8080';
-    const formattedDate = new Date(createdAt).toLocaleString();
-
-    const transporter = createTransporter();
-
-    const emailSubject = `New Portfolio Message — ${name}`;
-    const emailHtml = `
-      <div style="font-family: Arial, sans-serif; padding: 20px; color: #1e293b; max-width: 600px; border: 1px solid #e2e8f0; border-radius: 8px;">
-        <h2 style="color: #0f172a; margin-top: 0;">New Message from Portfolio</h2>
-        <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 15px 0;" />
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-        <p><strong>Received:</strong> ${formattedDate}</p>
-        <p><strong>Portfolio URL:</strong> <a href="${portfolioUrl}">${portfolioUrl}</a></p>
-        <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 15px 0;" />
-        <p><strong>Message:</strong></p>
-        <div style="background: #f8fafc; padding: 15px; border-radius: 6px; border-left: 4px solid #0f172a; font-size: 15px; line-height: 1.6; white-space: pre-wrap;">${message}</div>
-        <br />
-        <a href="mailto:${email}?subject=Re:%20Portfolio%20Message" style="display: inline-block; background: #0f172a; color: #ffffff; padding: 10px 18px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 14px;">Reply to Visitor &rarr;</a>
-      </div>
-    `;
-
-    if (transporter) {
-      try {
-        await transporter.sendMail({
-          from: `"Portfolio Messaging" <${process.env.SMTP_USER}>`,
-          to: ownerEmail,
-          replyTo: email,
-          subject: emailSubject,
-          html: emailHtml,
-        });
-        console.log(`[Email Delivered] Notification sent to ${ownerEmail} for message ${id}`);
-      } catch (mailErr) {
-        console.error('[Email Warning] Failed to send email via SMTP:', mailErr.message);
-        // Message is safely stored in DB
-      }
-    } else {
-      console.log(`[Local Simulation Mode] SMTP credentials not set in .env. Message ${id} saved to DB successfully.`);
-    }
-
-    return res.status(201).json({
-      success: true,
-      message: 'Message Sent ✓',
-      data: { id, createdAt }
-    });
+  return res.status(201).json({
+    success: true,
+    message: 'Message Sent ✓',
+    data: { id, createdAt }
   });
 });
 
 // 2. GET All Messages (Admin Endpoint)
-app.get('/api/messages', requireAdmin, (req, res) => {
+app.get('/api/messages', requireAdmin, async (req, res) => {
   const { status } = req.query;
-  let sql = `SELECT * FROM messages ORDER BY createdAt DESC`;
-  let params = [];
-
-  if (status) {
-    sql = `SELECT * FROM messages WHERE status = ? ORDER BY createdAt DESC`;
-    params.push(status);
-  }
-
-  db.all(sql, params, (err, rows) => {
-    if (err) {
-      return res.status(500).json({ error: 'Failed to fetch messages' });
-    }
+  try {
+    const sql = status
+      ? `SELECT * FROM messages WHERE status = $1 ORDER BY "createdAt" DESC`
+      : `SELECT * FROM messages ORDER BY "createdAt" DESC`;
+    const { rows } = await db.query(sql, status ? [status] : []);
     res.json({ success: true, count: rows.length, messages: rows });
-  });
+  } catch (err) {
+    console.error('Database Error: Failed to fetch messages:', err.message);
+    res.status(500).json({ error: 'Failed to fetch messages' });
+  }
 });
 
 // 3. PATCH Update Message Status (Admin Endpoint)
-app.patch('/api/messages/:id', requireAdmin, (req, res) => {
+app.patch('/api/messages/:id', requireAdmin, async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
 
@@ -269,15 +205,19 @@ app.patch('/api/messages/:id', requireAdmin, (req, res) => {
     return res.status(400).json({ error: 'Invalid status value. Must be new, read, or replied.' });
   }
 
-  db.run(`UPDATE messages SET status = ? WHERE id = ?`, [status, id], function (err) {
-    if (err) {
-      return res.status(500).json({ error: 'Failed to update message status' });
-    }
-    if (this.changes === 0) {
+  try {
+    const result = await db.query(
+      `UPDATE messages SET status = $1 WHERE id = $2`,
+      [status, id]
+    );
+    if (result.rowCount === 0) {
       return res.status(404).json({ error: 'Message not found' });
     }
     res.json({ success: true, id, status });
-  });
+  } catch (err) {
+    console.error('Database Error: Failed to update message status:', err.message);
+    res.status(500).json({ error: 'Failed to update message status' });
+  }
 });
 
 // 4. SSE Real-Time Stream Endpoint for Admin Dashboard
@@ -295,11 +235,16 @@ app.get('/api/messages/stream', requireAdmin, (req, res) => {
   });
 });
 
-// Start Express Server
-app.listen(PORT, () => {
-  console.log(`==================================================`);
-  console.log(`Portfolio Messaging Server running on port ${PORT}`);
-  console.log(`API Endpoint: http://localhost:${PORT}/api/contact`);
-  console.log(`Database: ${dbPath}`);
-  console.log(`==================================================`);
+// Start Express Server after the database is ready
+initializeDatabase().then(() => {
+  app.listen(PORT, () => {
+    console.log(`==================================================`);
+    console.log(`Portfolio Messaging Server running on port ${PORT}`);
+    console.log(`API Endpoint: http://localhost:${PORT}/api/contact`);
+    console.log('Database: Neon PostgreSQL');
+    console.log(`==================================================`);
+  });
+}).catch((err) => {
+  console.error('Failed to initialize the Neon database:', err.message);
+  process.exitCode = 1;
 });
