@@ -22,7 +22,7 @@ db.on('error', (err) => {
 app.use(cors());
 app.use(express.json({ limit: '10kb' }));
 // Serve only the website itself: never the database, server code, .env or backups
-const PUBLIC_FILES = ['index.html', 'style.css', 'script.js', 'case-stories.js'];
+const PUBLIC_FILES = ['index.html', 'style.css', 'script.js', 'case-stories.js', 'robots.txt', 'sitemap.xml'];
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.get(['/', ...PUBLIC_FILES.map(f => `/${f}`)], (req, res) => {
   res.sendFile(path.join(__dirname, req.path === '/' ? 'index.html' : req.path.slice(1)));

@@ -10,4 +10,6 @@ frontend:
       - style.css
       - script.js
       - case-stories.js
+      - robots.txt
+      - sitemap.xml
       - assets/**/*
